@@ -1,2 +1,2 @@
 # FakeNewsDetectionIIOT6
-This is our repository for our IIOT-6 Project task based on NLP modules used to build a Fake News Detection System.
+This is our repository for our IIOT-6 Project task based on NLP modules used to build a Fake News Detection System. The purpose of this system is to develop a web-based Fake News Detection application that uses Natural Language Processing (NLP) models to classify news articles as Real or Fake. The system will allow users to input news text or a URL and receive a prediction result based on trained machine learning models.
