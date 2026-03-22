@@ -1,0 +1,13 @@
+Flask
+pymongo
+scikit-learn
+pandas
+numpy
+nltk
+joblib
+flask-bcrypt
+flask-login
+python-dotenv
+gunicorn
+requests
+dnspython

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="admin-container mt-5 glass">
+
+<h2 class="admin-title">Admin Analytics</h2>
+
+<!-- STATS CARDS -->
+<div class="admin-cards">
+
+<div class="card">
+<h3>Total Users</h3>
+<p>{{ users }}</p>
+</div>
+
+<div class="card">
+<h3>Total Predictions</h3>
+<p>{{ predictions }}</p>
+</div>
+
+<div class="card fake">
+<h3>Fake News</h3>
+<p>{{ fake }}</p>
+</div>
+
+<div class="card real">
+<h3>Real News</h3>
+<p>{{ real }}</p>
+</div>
+
+</div>
+
+<!-- ACTION BUTTONS -->
+<div class="admin-actions">
+
+<a href="/admin/users" class="btn-primary">👥 Manage Users</a>
+
+<a href="/dashboard" class="btn-secondary">📊 View My Activity</a>
+
+</div>
+
+</div>
+
+{% endblock %}

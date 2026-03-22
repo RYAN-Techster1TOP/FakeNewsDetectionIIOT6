@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="table-container mt-5 glass">
+
+<h3>Recent Activity Analysis</h3>
+
+<table class="history-table">
+
+<thead>
+
+<tr>
+<th>News Text</th>
+<th>Prediction</th>
+<th>Confidence</th>
+<th>Date</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for item in history %}
+
+<tr>
+
+<td>{{item.text[:80]}}...</td>
+
+<td>
+{% if item.result == "Real News" %}
+<span style="color:#2ecc71;font-weight:bold;">Real</span>
+{% else %}
+<span style="color:#ff4d4d;font-weight:bold;">Fake</span>
+{% endif %}
+</td>
+
+<td>{% if item.confidence > 100 %}
+    {{ (item.confidence / 100) | round(2) }}%
+{% else %}
+    {{ item.confidence }}%
+{% endif %}</td>
+
+<td>{{item.time}}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="pagination-container">
+
+{% if total_pages > 1 %}
+
+{% if page > 1 %}
+<a href="/dashboard?page={{page-1}}" class="page-btn">Prev</a>
+{% endif %}
+
+{% for p in range(1, total_pages+1) %}
+
+<a href="/dashboard?page={{p}}"
+class="page-btn {% if p == page %}active-page{% endif %}">
+{{p}}
+</a>
+
+{% endfor %}
+
+{% if page < total_pages %}
+<a href="/dashboard?page={{page+1}}" class="page-btn">Next</a>
+{% endif %}
+
+{% endif %}
+
+</div>
+
+<div class="nav-actions">
+    <a href="/" class="nav-btn left-btn">← Back to Analyze</a>
+    <a href="/admin" class="nav-btn right-btn">← Admin Panel</a>
+</div>
+
+{% endblock %}

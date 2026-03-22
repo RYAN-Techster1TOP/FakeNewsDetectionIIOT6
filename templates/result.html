@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="result-container">
+    <h1 class="title">Prediction Result</h1>
+    <div class="result-card">
+        <h2 class="prediction {{ 'real' if prediction == 'Real News' else 'fake' }}">
+            {{ prediction }}
+        </h2>
+        <div class="confidence">
+            Confidence Score
+            <span>{{ confidence }}%</span>
+        </div>
+        <div class="result-buttons">
+            <a href="/" class="btn-primary">Check Another</a>
+            <a href="/dashboard" class="btn-secondary">View Dashboard</a>
+        </div>
+    </div>
+</div>
+<div class="analysis-section">
+    <div class="explain-box">
+        <h3>Why AI predicted this</h3>
+        <div class="keywords">
+        {% for word in words %}
+            <span class="keyword">{{word}}</span>
+        {% endfor %}
+        </div>
+    </div>
+    <div class="news-box">
+        <h3>Related News Sources</h3>
+        <div class="articles-container">
+       {% if articles and articles|length > 0 %}
+    {% for a in articles %}
+        <div class="article-card">
+            <a href="{{a.url}}" target="_blank">
+                <h4>{{a.title}}</h4>
+            </a>
+            <p>{{a.source}}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No related articles found.</p>
+{% endif %}
+    </div>
+</div>
+{% endblock %}

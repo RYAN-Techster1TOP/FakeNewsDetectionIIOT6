@@ -1,0 +1,1 @@
+console.log("Fake News Detector Loaded");

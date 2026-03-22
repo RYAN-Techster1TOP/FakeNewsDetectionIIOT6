@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="hero">
+<h1>AI Fake News Detector</h1>
+<p>Analyze news articles using machine learning to identify misinformation.</p>
+{% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+<form action="/predict" method="POST" onsubmit="showLoader()">
+<textarea name="news" placeholder="Paste news article here..." required></textarea>
+<br><br>
+<button type="submit" id="analyzeBtn">Analyze Article</button>
+</form>
+</div>
+<!-- LOADER -->
+<div id="loader" class="loader-container">
+    <div class="ai-loader"></div>
+    <p>Analyzing with AI...</p>
+</div>
+<!-- SCRIPT -->
+ <!-- SCRIPT -->
+<script>
+function showLoader(){
+    document.getElementById("loader").style.display = "flex";
+    document.getElementById("analyzeBtn").disabled = true;
+const loader = document.getElementById("loader");
+    loader.style.display = "flex";
+    loader.style.opacity = "0";
+    setTimeout(() => {
+        loader.style.opacity = "1";
+    }, 50);}
+</script>
+{% endblock %}
