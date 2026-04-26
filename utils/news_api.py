@@ -1,6 +1,17 @@
+import os
 import requests
+from dotenv import load_dotenv
 
-API_KEY = "69e166aa2e8a95ca651cf8770c4f5c09"
+# Load environment variables
+load_dotenv()
+
+# Get API key from environment variable
+API_KEY = os.getenv("GNEWS_API_KEY")
+if not API_KEY:
+    raise ValueError(
+        "ERROR: GNEWS_API_KEY environment variable not set. "
+        "Please set GNEWS_API_KEY in your .env file with your GNews API key from https://gnews.io/"
+    )
 
 def check_real_news(query):
     articles = []
@@ -13,7 +24,7 @@ def check_real_news(query):
         url = f"https://gnews.io/api/v4/search?q={query}&lang=en&country=in&max=5&token={API_KEY}"
         res = requests.get(url, headers=headers).json()
 
-        print("API RESPONSE:", res)  # Debug log
+        print("API RESPONSE:", res)
 
         if res.get("articles"):
             for a in res.get("articles", [])[:5]:
@@ -24,12 +35,11 @@ def check_real_news(query):
                         "source": a["source"]["name"]
                     })
 
-        # 🔁 fallback
         if len(articles) == 0:
             fallback_url = f"https://gnews.io/api/v4/top-headlines?country=us&token={API_KEY}"
             res = requests.get(fallback_url, headers=headers).json()
 
-            print("Fallback API RESPONSE:", res)  # Debug log
+            print("Fallback API RESPONSE:", res)
 
             if res.get("articles"):
                 for a in res.get("articles", [])[:5]:

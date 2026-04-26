@@ -2,14 +2,23 @@ from flask import Flask, render_template, request, redirect, session
 import joblib
 import uuid
 import re
+import os
+from dotenv import load_dotenv
 from datetime import datetime
 from database.db import users, history
 from utils.preprocess import clean_text
 from utils.explain import explain_prediction
 from utils.news_api import check_real_news
 from bson.objectid import ObjectId
+
+# Load environment variables
+load_dotenv()
+
 app = Flask(__name__)
-app.secret_key = "supersecret"
+
+# Get secret key from environment - use config.py to ensure validation
+from config import Config
+app.secret_key = Config.SECRET_KEY
 # Load model
 model = joblib.load("models/fake_news_model.pkl")
 vectorizer = joblib.load("models/tfidf_vectorizer.pkl")
